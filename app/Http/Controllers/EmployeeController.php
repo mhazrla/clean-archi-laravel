@@ -30,17 +30,10 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function store(Request $request, EmployeeUseCase $employeeUseCase)
+    public function store(Request $request, EmployeeUseCase $employeeUseCase, $id = null)
     {
         return response()->json([
-            'data' => $employeeUseCase->storeEmployee($request->all())
-        ]);
-    }
-
-    public function update(Request $request, $id, EmployeeUseCase $employeeUseCase)
-    {
-        return response()->json([
-            'data' => $employeeUseCase->updateEmployee($id, $request->all())
+            'data' => $employeeUseCase->storeOrUpdateEmployee($id, $request->all())
         ]);
     }
 

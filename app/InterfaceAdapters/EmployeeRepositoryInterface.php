@@ -14,9 +14,11 @@ class EmployeeRepositoryInterface implements EmployeeRepository
         return Employee::all();
     }
 
-    public function store(array $data): Employee
+    public function store($id = null, array $data): Employee
     {
-        return Employee::create($data);
+        return Employee::updateOrCreate([
+            'id' => $id
+        ], $data);
     }
 
     public function findById(int $id): ?Employee
@@ -36,14 +38,9 @@ class EmployeeRepositoryInterface implements EmployeeRepository
         return new Employee($data);
     }
 
-    public function update($id, $data): Employee
+    public function delete($id)
     {
-        return Employee::where('id', $id)->update($data);
-    }
-
-    public function delete($id): Employee
-    {
-        $employeeModel = ModelsEmployee::find($employee->getId());
-        $employeeModel->delete();
+        $employee = Employee::findOrFail($id);
+        return $employee->delete();
     }
 }

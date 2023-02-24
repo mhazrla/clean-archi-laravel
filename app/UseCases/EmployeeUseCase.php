@@ -24,17 +24,12 @@ class EmployeeUseCase
         return $this->employeeRepository->findById($id);
     }
 
-    public function storeEmployee(array $data): Employee
+    public function storeOrUpdateEmployee($id = null, array $data)
     {
-        return $this->employeeRepository->store($data);
+        return $this->employeeRepository->store($id, $data);
     }
 
-    public function updateEmployee(int $id, array $data): Employee
-    {
-        return $this->employeeRepository->update($id, $data);
-    }
-
-    public function deleteEmployee(int $id): Employee
+    public function deleteEmployee(int $id)
     {
         return $this->employeeRepository->delete($id);
     }
